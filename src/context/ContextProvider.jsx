@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Spinner from "../components/Spiner";
-import { iconWetter,wochenTageAr,
-    wochenTageDe,
-    wochenTageEn, } from './../actions/globalVariable'
+import Spinner from "../components/Spinner";
+import { iconWetter,weeklyDaysAr,
+    weeklyDaysDe,
+    weeklyDaysEn, } from './../actions/globalVariable'
 
-export const ContextWetter = React.createContext();
+export const contextWeather = React.createContext();
 // eslint-disable-next-line react/prop-types
 function ContextProvider({ children }) {
     const [isError, setError] = useState(false);
-    const [wetterDataTag, setWetterDataTag] = useState(null);
+    const [weatherDataDay, setWetterDataTag] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [sprache, setSprache] = useState("de");
-    const [ort, setOrt] = useState("Berlin");
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${ort}&lang=${sprache}&appid=33a793b29df1394a38e1a1b8c9bc0eda&units=metric`;
+    const [language, setLanguage] = useState("de");
+    const [location, setLocation] = useState("Berlin");
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&lang=${language}&appid=33a793b29df1394a38e1a1b8c9bc0eda&units=metric`;
 
    
     const fetchData = useCallback(
@@ -36,7 +36,7 @@ function ContextProvider({ children }) {
                
             } catch (error) {
                 setError(true);
-                console.error(error, "Ort ist nicht bekannt");
+                console.error(error, "location ist nicht bekannt");
             }
         },
         [url]
@@ -63,23 +63,23 @@ function ContextProvider({ children }) {
     }
 
     return (
-        <ContextWetter.Provider
+        <contextWeather.Provider
             value={{
-                setOrt,
-                setSprache,
+                setLocation,
+                setLanguage,
                 iconWetter,
-                wochenTageAr,
-                wochenTageDe,
-                wochenTageEn,
-                wetterDataTag,
+                weeklyDaysAr,
+                weeklyDaysDe,
+                weeklyDaysEn,
+                weatherDataDay,
                 isLoading,
-                ort,
-                sprache,
+                location,
+                language,
                 isError,
             }}
         >
             {children}
-        </ContextWetter.Provider>
+        </contextWeather.Provider>
     );
 }
 

@@ -1,8 +1,8 @@
 import "./App.css";
-import AktuellesWetter from "./components/AktuellesWetter";
-import FuenfTagesVorschau from "./components/FuenfTagesVorschau";
+import CurrentWeather from "./components/CurrentWeather";
+import FiveDayWeatherPreview from "./components/FiveDayWeatherPreview";
 import Header from "./components/Header";
-import Wetter from "./components/Wetter";
+import Weather from "./components/Weather";
 import Footer from "./components/Footer";
 import ContextProvider from "./context/ContextProvider";
 import Input from "./components/Input";
@@ -13,9 +13,9 @@ function App() {
 
             <ContextProvider>
                 <Input />
-                <AktuellesWetter />
-                <Wetter />
-                <FuenfTagesVorschau />
+                <CurrentWeather />
+                <Weather />
+                <FiveDayWeatherPreview />
             </ContextProvider>
             <Footer />
         </div>

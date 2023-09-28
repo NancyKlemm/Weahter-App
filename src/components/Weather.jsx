@@ -6,36 +6,36 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { ContextWetter } from "../context/ContextProvider";
+import { contextWeather } from "../context/ContextProvider";
 
-const Wetter = () => {
-    const { isError,wetterDataTag} = useContext(ContextWetter);
+const Weather = () => {
+    const { isError,weatherDataDay} = useContext(contextWeather);
     return (
         <div className="wetterdisplay2">
             { !isError ? (
                 <>
                     <p>
                         <FontAwesomeIcon icon={faWind} />{" "}
-                        {wetterDataTag.list[0].wind.speed} km/h
+                        {weatherDataDay.list[0].wind.speed} km/h
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faUmbrella} />{" "}
-                        {wetterDataTag.list[0].main.humidity} %
+                        {weatherDataDay.list[0].main.humidity} %
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faTemperatureArrowUp} />{" "}
-                        {wetterDataTag.list[0].main.temp_max.toFixed(0)} °C
+                        {weatherDataDay.list[0].main.temp_max.toFixed(0)} °C
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faTemperatureArrowDown} />{" "}
-                        {wetterDataTag.list[0].main.temp_min.toFixed(0)} °C
+                        {weatherDataDay.list[0].main.temp_min.toFixed(0)} °C
                     </p>
                 </>
             ) : (
-                <p>Ort ist nicht bekannt</p>
+                <p>location is unknown</p>
             )}
         </div>
     );
 };
 
-export default Wetter;
+export default Weather;

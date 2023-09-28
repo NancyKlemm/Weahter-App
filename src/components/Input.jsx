@@ -1,20 +1,20 @@
 import { useContext, useState } from "react";
-import { ContextWetter } from "../context/ContextProvider";
+import { contextWeather } from "../context/ContextProvider";
 
 function Input() {
-    const { sprache, setOrt, ort, setSprache } = useContext(ContextWetter);
-    const [input, setInput] = useState(ort);
-    const sucheHendle = (event) => {
+    const { language, setLocation, location, setLanguage } = useContext(contextWeather);
+    const [input, setInput] = useState(location);
+    const searchHandler = (event) => {
         event.preventDefault();
-        setOrt(input);
+        setLocation(input);
     };
 
     return (
-        <div className="suchbox">
+        <div className="search-section">
             <form>
                 <select
-                    value={sprache}
-                    onChange={(event) => setSprache(event.target.value)}
+                    value={language}
+                    onChange={(event) => setLanguage(event.target.value)}
                 >
                     <option value="de">DE</option>
                     <option value="en">EN</option>
@@ -23,12 +23,12 @@ function Input() {
 
                 <input
                     type="text"
-                    name="ort"
-                    id="ort"
+                    name="location"
+                    id="location"
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
                 />
-                <button type="submit" onClick={sucheHendle}>
+                <button type="submit" onClick={searchHandler}>
                     Suche
                 </button>
             </form>

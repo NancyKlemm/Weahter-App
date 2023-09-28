@@ -1,23 +1,23 @@
 import { useContext } from "react";
-import { ContextWetter } from "../context/ContextProvider";
-const FuenfTagesVorschau = () => {
-    const {iconWetter, wetterDataTag, sprache, wochenTageAr, wochenTageDe, wochenTageEn } =
-        useContext(ContextWetter);
+import { contextWeather } from "../context/ContextProvider";
+const FiveDayWeatherPreview = () => {
+    const {iconWetter, weatherDataDay, language, weeklyDaysAr, weeklyDaysDe, weeklyDaysEn } =
+        useContext(contextWeather);
     
-    console.log(wetterDataTag);
+    console.log(weatherDataDay);
     
-    const filteredWetterData = wetterDataTag?.list
+    const filteredWetterData = weatherDataDay?.list
         .slice(0, 42)
         .filter((_, index) => index % 8 === 0);
     const getDayOfWeek = (dateString) => {
 
-        // die Tage werden mit sprituperetur aus gebackt da die von anderen data kommen 
+        // die Tage werden mit Spread Operator ausgepackt da die von der anderen data kommen 
         const daysOfWeek =
-            sprache === "en"
-                ? [...wochenTageEn]
-                : sprache === "de"
-                ? [...wochenTageDe]
-                : [...wochenTageAr];
+            language === "en"
+                ? [...weeklyDaysEn]
+                : language === "de"
+                ? [...weeklyDaysDe]
+                : [...weeklyDaysAr];
         const date = new Date(dateString);
         return daysOfWeek[date.getDay()];
     };
@@ -52,4 +52,4 @@ const FuenfTagesVorschau = () => {
         </div>
     );
 };
-export default FuenfTagesVorschau;
+export default FiveDayWeatherPreview;

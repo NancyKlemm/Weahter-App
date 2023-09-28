@@ -1,5 +1,5 @@
 
-export const wochenTageDe = [
+export const weeklyDaysDe = [
     "So",
     "Mo",
     "Di",
@@ -8,7 +8,7 @@ export const wochenTageDe = [
     "Fr",
     "Sa",
   ];
-  export const wochenTageAr = [
+  export const weeklyDaysAr = [
     "الأحد",
     "الإثنين",
     "الثلاثاء",
@@ -17,7 +17,7 @@ export const wochenTageDe = [
     "الجمعة",
     "السبت",
   ];
-  export const wochenTageEn = [
+  export const weeklyDaysEn = [
     "Su",
     "Mo",
     "Tu",

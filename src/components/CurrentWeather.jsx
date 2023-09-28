@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ContextWetter } from "../context/ContextProvider";
+import { contextWeather } from "../context/ContextProvider";
 import {iconWetter} from '../actions/globalVariable'//icon Funktion
 import {
     faLocationDot,
@@ -9,39 +9,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const AktuellesWetter = () => {
-    const { sprache,wetterDataTag, wochenTageAr, wochenTageDe, wochenTageEn,isError } =
-        useContext(ContextWetter);
-    const [sonnenAufGang, setSonnenAufGang] = useState(0);
-    const [sonnenUnterGang, setSonnenUnterGang] = useState(0);
-    const sunriseDate = new Date(sonnenAufGang * 1000);// rechnung von miele secunden von sonnenA Unix-Zeitstempel-Format
-    const sunsetDate = new Date(sonnenUnterGang * 1000);// rechnung von miele secunden
-    //bearbeitung die Tage in verschedene Sprachen
+const CurrentWeather = () => {
+    const { language,weatherDataDay, weeklyDaysAr, weeklyDaysDe, weeklyDaysEn,isError } =
+        useContext(contextWeather);
+    const [sunrise, setSunrise] = useState(0);
+    const [sunset, setSunset] = useState(0);
+    const sunriseDate = new Date(sunrise * 1000);// rechnung von Millisekunden von SonnenAufgang Unix-Zeitstempel-Format
+    const sunsetDate = new Date(sunset * 1000);// rechnung von Millisekunden von Sonnenuntergang
+    //Bearbeitung die Tage in verschiedene Sprachen
     const weekdayDe =
-        sprache === "de"
-            ? wochenTageDe[sunriseDate.getDay()]
-            : sprache === "en"
-            ? wochenTageEn[sunriseDate.getDay()]
-            : wochenTageAr[sunriseDate.getDay()];
-    // Sonnen Zeiten 
-    function sonneZeiten() {
-        setSonnenAufGang(wetterDataTag.city.sunrise);
-        setSonnenUnterGang(wetterDataTag.city.sunset);
+        language === "de"
+            ? weeklyDaysDe[sunriseDate.getDay()]
+            : language === "en"
+            ? weeklyDaysEn[sunriseDate.getDay()]
+            : weeklyDaysAr[sunriseDate.getDay()];
+    // Sonnen-Zeiten 
+    function sunTime() {
+        setSunrise(weatherDataDay.city.sunrise);
+        setSunset(weatherDataDay.city.sunset);
     }
     useEffect(() => {
-        sonneZeiten();
-    }, [sonnenAufGang]);
+        sunTime();
+    }, [sunrise]);
 
 
     return (
         <div className="display">
             
-            {/* isError**  wenn keine data noch für handen sind  */}
+            {/* isError**  wenn keine data vorhanden ist  */}
             {!isError ? (
                 <>
                     <div className="wetterdisplay">
                         <p>
-                            {/* tag und datum  */}
+                            {/* Tag und Datum  */}
                             {weekdayDe}{" "}
                             {sunriseDate
                                 .toLocaleDateString("de-DE")
@@ -49,24 +49,24 @@ const AktuellesWetter = () => {
                         </p>
                         <p className="gebiet">
                             <FontAwesomeIcon icon={faLocationDot} />{" "}
-                            {wetterDataTag.city.name}
+                            {weatherDataDay.city.name}
                         </p>
                         <p className="temperatur">
                             {" "}
-                            {wetterDataTag.list[0].main.temp.toFixed()}
+                            {weatherDataDay.list[0].main.temp.toFixed()}
                             <span> °C</span>
                         </p>
                         <span>
                             {" "}
                             <img
                                 className="img_tags_schau"
-                                src={`${iconWetter(wetterDataTag.list[0]?.weather[0].icon)}`}
+                                src={`${iconWetter(weatherDataDay.list[0]?.weather[0].icon)}`}
                                 // iconWetter ist ein Function der den link von Icon ändert
                             />
                         </span>
                         <p className="wetter">
                             {" "}
-                            {wetterDataTag.list[0].weather[0].description}
+                            {weatherDataDay.list[0].weather[0].description}
                         </p>
                     </div>
                     <div className="sonne">
@@ -78,9 +78,9 @@ const AktuellesWetter = () => {
                     </div>
                 </>
             ) : (
-               <p>Ort ist nicht bekannt</p>
+               <p>location ist nicht bekannt</p>
             )}
         </div>
     );
 };
-export default AktuellesWetter;
+export default CurrentWeather;
