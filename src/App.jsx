@@ -1,4 +1,3 @@
-import "./App.css";
 import CurrentWeather from "./components/CurrentWeather";
 import FiveDayWeatherPreview from "./components/FiveDayWeatherPreview";
 import Header from "./components/Header";
