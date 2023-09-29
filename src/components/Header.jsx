@@ -1,8 +1,7 @@
-
 const Header = () => {
     return (
         <header>
-            <h1>Wetter App</h1>
+            <h1>Weather-App</h1>
         </header>
     );
 };

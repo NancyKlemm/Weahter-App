@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { contextWeather } from "../context/ContextProvider";
 
 function Input() {
-    const { language, setLocation, location, setLanguage } = useContext(contextWeather);
+    const { language, setLocation, location, setLanguage } =
+        useContext(contextWeather);
     const [input, setInput] = useState(location);
     const searchHandler = (event) => {
         event.preventDefault();

@@ -1,15 +1,11 @@
-
-
 const Footer = () => {
     return (
-
-        <footer className="display">
+        <footer>
             <h2>
-                Wetter App by
+                Weather-App by
                 <br />
-                 Nancy Klemm & Youssef Alzibak 
+                Nancy Klemm & Youssef Alzibak
             </h2>
-
         </footer>
     );
 };

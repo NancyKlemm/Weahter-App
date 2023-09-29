@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { contextWeather } from "../context/ContextProvider";
 
-const Weather = () => {
-    const { isError,weatherDataDay} = useContext(contextWeather);
+const WeatherInfo = () => {
+    const { isError, weatherDataDay } = useContext(contextWeather);
     return (
-        <div className="wetterdisplay2">
-            { !isError ? (
+        <div className="weather-info">
+            {!isError ? (
                 <>
                     <p>
                         <FontAwesomeIcon icon={faWind} />{" "}
@@ -38,4 +38,4 @@ const Weather = () => {
     );
 };
 
-export default Weather;
+export default WeatherInfo;

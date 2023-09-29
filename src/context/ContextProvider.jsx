@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
-import { iconWetter,weeklyDaysAr,
+import {
+    iconWetter,
+    weeklyDaysAr,
     weeklyDaysDe,
-    weeklyDaysEn, } from './../actions/globalVariable'
+    weeklyDaysEn,
+} from "./../actions/globalVariable";
 
 export const contextWeather = React.createContext();
 // eslint-disable-next-line react/prop-types
@@ -14,7 +17,6 @@ function ContextProvider({ children }) {
     const [location, setLocation] = useState("Berlin");
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&lang=${language}&appid=33a793b29df1394a38e1a1b8c9bc0eda&units=metric`;
 
-   
     const fetchData = useCallback(
         async function fetchWetter() {
             try {
@@ -23,7 +25,7 @@ function ContextProvider({ children }) {
                 console.log(data);
                 setIsLoading(false);
                 setError(false);
-              
+
                 //Wenn die Daten nicht geladen werden können,
                 // wird ein Objekt zurückgegeben, das den Code 404 enthält
                 if (data.cod !== "404") {
@@ -33,7 +35,6 @@ function ContextProvider({ children }) {
                     // Error-Funktion zum Überspringen des nächsten Fetch
                     throw new Error();
                 }
-               
             } catch (error) {
                 setError(true);
                 console.error(error, "location ist nicht bekannt");
@@ -41,23 +42,22 @@ function ContextProvider({ children }) {
         },
         [url]
     );
-// Update der Ergebnisse alle 30 Minuten und bei Änderung des Links.
+    // Update der Ergebnisse alle 30 Minuten und bei Änderung des Links.
     useEffect(() => {
         const updateFunction = () => {
-            fetchData()
-        }
-        fetchData()
-       // Callback, Zeit wird in Millisekunden berechnet
-       // setInterval - JavaScript-Funktion 
-       //zum periodischen Ausführen von asynchronen
-       // Funktionen zu bestimmten Zeiten
+            fetchData();
+        };
+        fetchData();
+        // Callback, Zeit wird in Millisekunden berechnet
+        // setInterval - JavaScript-Funktion
+        //zum periodischen Ausführen von asynchronen
+        // Funktionen zu bestimmten Zeiten
         const interval = setInterval(updateFunction, 30 * 60 * 1000);
         //Zurücksetzen der Interval-Funktion
         return () => clearInterval(interval);
     }, [fetchData]);
 
-
-//Loding Spinner
+    //Loding Spinner
     if (isLoading) {
         return <Spinner />;
     }
