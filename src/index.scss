@@ -192,11 +192,9 @@ h2 {
 }
 
 footer {
-    position: absolute;
-    bottom: 0px;
+    margin-top: 1.9rem;
     text-align: center;
     padding-block: 1rem;
-    margin: 0 auto;
     width: 100vw;
     background-color: rgba(240, 255, 255, 0.222);
     h2 {
@@ -263,6 +261,8 @@ footer {
             }
         }
         footer {
+            position: relative;
+            margin-top: 4rem;
             h2 {
                 font-size: 1.5rem;
             }
